@@ -48,7 +48,9 @@ function rotate() {
         }
         context.fill();
     }
-    
+    for (i = 0; i < 37; i++) {
+        drawNumbers(i, $angles[i].start, indice);
+    }
     context.beginPath();
     context.arc(center, center, 160, 0, 2 * Math.PI, false);
     context.fillStyle = 'white';
@@ -58,6 +60,20 @@ function rotate() {
     requestAnimationFrame(rotate);
 }
 requestAnimationFrame(rotate)
+
+function drawNumbers(number, startAngle, indice) {
+    x = center + Math.cos(startAngle + (triangleBaseAngle * 0.86 / 2 )) * 172;
+    y = center + Math.sin(startAngle + (triangleBaseAngle * 0.86 / 2 )) * 172;
+    context.save();
+    context.translate(x, y);
+    context.rotate(Math.PI / 2 + number * triangleBaseAngle + indice);
+    context.translate(-x, -y);
+    context.font = 'bold 15pt Calibri';
+    context.fillStyle = 'white';
+    context.textAlign = 'center';
+    context.fillText(number, x, y, 16);
+    context.restore()
+}
 
 function drawBall() {
     if ((indiceRotateBall <= 0.05 && ((indiceRotateBall % (Math.PI * 2)) >= ($angles[stopTo].start % (Math.PI * 2)) && (indiceRotateBall % (Math.PI * 2)) <= ($angles[stopTo].end % (Math.PI * 2))) ) || stopped) {
@@ -75,3 +91,12 @@ function drawBall() {
     context.closePath();
 }
 
+function rotateBallTo(number){
+    indice = 0;
+    time = 40;
+    rotateAngle = 0.08;
+    ballAngle = 0;
+    indiceRotateBall = 0.6;
+    stopTo = number;
+    stopped = false;
+}
