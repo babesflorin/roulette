@@ -100,3 +100,7 @@ function rotateBallTo(number){
     stopTo = number;
     stopped = false;
 }
+
+function feelingLucky(){
+    rotateBallTo(Math.floor(Math.random() * (36 - 0 + 1)) + 0)
+}
